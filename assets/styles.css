@@ -1,0 +1,24 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#nav {
+    background-color: green;
+
+}
+
+#nav-list {
+    display: flex;
+}
+
+#nav-list > li {
+    list-style-type: none;
+    padding-right: 10px;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+
+}
