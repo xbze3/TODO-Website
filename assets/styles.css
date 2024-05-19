@@ -70,6 +70,12 @@
     margin-left: 10px;
     color: white;
     border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
 }
 
 
@@ -136,3 +142,40 @@
     align-items: center;
 }
 
+#list-items {
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+    background-color: aqua;
+    border: 3px solid black;
+
+
+}
+
+#title-space {
+    width: 200px;
+    display: flex;
+    align-items: center;
+
+
+}
+
+#desc-space {
+    width: 500px;
+
+}
+
+#close-space {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-item {
+    height: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+
+}

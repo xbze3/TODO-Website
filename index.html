@@ -27,8 +27,10 @@
             :title="todoTitle"
             :desc="todoDesc">
             </entry-info>
+
+            <todo-list></todo-list>
             `,
-            components: ['nav-bar', 'add-entry-btn', 'entry-info'],
+            components: ['nav-bar', 'add-entry-btn', 'entry-info', 'todo-list'],
             data() {
                 return {
                     showAddBox: false,
@@ -43,8 +45,14 @@
                 toggleAddBox() {
                     this.showAddBox = !this.showAddBox
                 },
-                addTODO() {
-                    console.log(`Main Title: ${this.todoTitle}`)
+                addTODO(title, desc) {
+                    this.todoTitle = title
+                    this.todoDesc = desc
+
+                    console.log(`Main Title: ${this.todoTitle}`);
+                    console.log(`Main Description: ${this.todoDesc}`);
+
+                    this.todoArray.push({ title: this.todoTitle, desc: this.todoDesc });
                 }
             }
         })
@@ -56,6 +64,25 @@
                     <li id="active"><a href="#" class="link">TODO-List</a></li>
                     <li id="home-link"><a href="#" class="link">Home</a></li>
                 </ul>
+            </div>
+            `
+        })
+
+        app.component('todo-list', {
+            template: `
+            <div id="list-items">
+                <div id="title-space" class="todo-item">
+                    <p>Get a Job</p>
+                </div>
+
+                <div id="desc-space" class="todo-item">
+                    <p></p>
+                </div>
+
+                <div id="close-space" class="todo-item">
+                    <p><a href="#">x</a></p>
+                </div>
+
             </div>
             `
         })
@@ -82,30 +109,31 @@
 
         app.component('entry-info', {
             template: `
-                <div id="hidden-add">
-                    <form @submit.prevent="addTODO">
-                        <div id="add-entry-box">
-                            <div>
-                                <p><a href="#" @click.prevent="toggleAddBox">X</p>      
-                            </div>
-                            <div>
-                                <h3 class="box-title">Title</h3>
-                                <input type="text" class="input-box" id="title-box" v-model="compTitle">
-                            </div>
-                            <div>
-                                <h3 class="box-title">Description (Optional)</h3>
-                                <textarea type="text" class="input-box" id="desc-box" v-model="compDesc" /> 
-                            </div>
-                            <div id="button-div">
-                                <button>Add TODO Item</button>
-                            </div>
+
+                <form>
+                    <div id="add-entry-box">
+                        <div>
+                            <p><a href="#" @click.prevent="toggleAddBox">X</a></p>      
                         </div>
-                    <form>
-                </div>
+                        <div>
+                            <h3 class="box-title">Title</h3>
+                            <input type="text" class="input-box" id="title-box" v-model="compTitle" />
+                        </div>
+                        <div>
+                            <h3 class="box-title">Description (Optional)</h3>
+                            <textarea type="text" class="input-box" id="desc-box" v-model="compDesc" /> 
+                        </div>
+                        <div id="button-div">
+                            <button @click.prevent="addTODO">Add TODO Item</button>
+                        </div>
+                    </div>
+                </form>
+        
             `,
             data() {
                 return {
-
+                    compTitle: this.title,
+                    compDesc: this.desc
                 }
             },
             props: ['title', 'desc'],
@@ -114,7 +142,9 @@
                     this.$emit('toggle-add-box');
                 },
                 addTODO() {
-                    this.$emit('add-todo')
+                    this.$emit('add-todo', this.compTitle, this.compDesc)
+                    this.compTitle = ''
+                    this.compDesc = ''
                 }
             }
         })
