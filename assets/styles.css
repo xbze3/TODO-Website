@@ -179,3 +179,16 @@
 
 
 }
+
+#close-space > p > a{
+    text-decoration: none;
+    color: black;
+}
+
+#image-space {
+    margin-top: 10px;
+    margin-left: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

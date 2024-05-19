@@ -28,9 +28,14 @@
             :desc="todoDesc">
             </entry-info>
 
-            <todo-list v-for="item in todoArray" :title="item.title" :desc="item.desc"></todo-list>
+            <todo-list v-for="(item, index) in todoArray"
+            :title="item.title" :desc="item.desc"
+            :position="index"
+            @delete-element="deleteElement">
+            </todo-list>
+
             `,
-            components: ['nav-bar', 'add-entry-btn', 'entry-info', 'todo-list'],
+            components: ['nav-bar', 'add-entry-btn', 'entry-info', 'todo-list', 'none-here'],
             data() {
                 return {
                     showAddBox: false,
@@ -44,6 +49,8 @@
             methods: {
                 toggleAddBox() {
                     this.showAddBox = !this.showAddBox
+                    this.todoTitle = ''
+                    this.todoDesc = ''
                 },
                 addTODO(title, desc) {
                     this.todoTitle = title
@@ -53,6 +60,9 @@
                     console.log(`Main Description: ${this.todoDesc}`);
 
                     this.todoArray.push({ title: this.todoTitle, desc: this.todoDesc });
+                },
+                deleteElement(index) {
+                    this.todoArray.splice(index, 1)
                 }
             }
         })
@@ -61,8 +71,8 @@
             template: `
             <div id="nav">
                 <ul id="nav-list">
-                    <li id="active"><a href="#" class="link">TODO-List</a></li>
-                    <li id="home-link"><a href="#" class="link">Home</a></li>
+                    <li id="active"><a href="index.html" class="link">TODO-List</a></li>
+                    <li id="home-link"><a href="index.html" class="link">Home</a></li>
                 </ul>
             </div>
             `
@@ -81,12 +91,22 @@
                 </div>
 
                 <div id="close-space" class="todo-item">
-                    <p><a href="#">x</a></p>
+                    <p><a href="#" @click.prevent="removeElement">x</a></p>
                 </div>
 
             </div>
             `,
-            props: ['title', 'desc']
+            props: ['title', 'desc', 'position'],
+            data() {
+                return {
+                    index: this.position
+                }
+            },
+            methods: {
+                removeElement() {
+                    this.$emit('delete-element', this.index)
+                }
+            }
 
         })
 
