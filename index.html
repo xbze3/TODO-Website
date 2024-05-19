@@ -9,8 +9,8 @@
     <div id="app">
 
         <nav-bar></nav-bar>
-        <add-entry-btn></add-entry-btn>
-        <entry-info v-if="showAddBar"></entry-info>
+        <add-entry-btn @toggle-add-box="toggleAddBox"></add-entry-btn>
+        <entry-info v-if="showAddBox"></entry-info>
 
     </div>
 
@@ -19,11 +19,13 @@
         let app = Vue.createApp({
             data() {
                 return {
-                    showAddBar: false
+                    showAddBox: false
                 }
             },
             methods: {
-
+                toggleAddBox() {
+                    this.showAddBox = !this.showAddBox
+                }
             }
         })
 
@@ -52,7 +54,9 @@
                 }
             },
             methods: {
-
+                toggleAddBox() {
+                    this.$emit('toggle-add-box');
+                }
             }
         })
 
