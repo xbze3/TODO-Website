@@ -10,7 +10,7 @@
 
         <nav-bar></nav-bar>
         <add-entry-btn></add-entry-btn>
-        <entry-info></entry-info>
+        <entry-info v-if="showAddBar"></entry-info>
 
     </div>
 
@@ -19,7 +19,7 @@
         let app = Vue.createApp({
             data() {
                 return {
-
+                    showAddBar: false
                 }
             },
             methods: {
@@ -42,25 +42,36 @@
             template: `
             <div id="add-entry">
                 <ul>
-                    <li><a href="#" @click.prevent="addEntry">+</a></li>
+                    <li><a href="#" @click.prevent="toggleAddBox">+</a></li>
                 </ul>
             </div>
             `,
             data() {
                 return {
-
+                    
                 }
             },
             methods: {
-                addEntry() {
-                    console.log("Hello")
-                }
+
             }
         })
 
         app.component('entry-info', {
             template: `
-            
+                <div id="hidden-add" v-if="">
+                    <form>
+                        <div id="add-entry-box">
+                            <div>
+                                <h3 class="box-title">Title</h3>
+                                <input type="text" class="input-box" id="title-box">  
+                            </div>
+                            <div>
+                                <h3 class="box-title">Description (Optional)</h3>
+                                <textarea type="text" class="input-box" id="desc-box" /> 
+                            </div>    
+                        </div>
+                    <form>
+                </div>
             `
         })
 
