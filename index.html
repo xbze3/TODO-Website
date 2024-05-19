@@ -8,7 +8,9 @@
 <body>
     <div id="app">
 
-        <nav-bar />
+        <nav-bar></nav-bar>
+        <add-entry-btn></add-entry-btn>
+        <entry-info></entry-info>
 
     </div>
 
@@ -33,6 +35,32 @@
                     <li id="home-link"><a href="#" class="link">Home</a></li>
                 </ul>
             </div>
+            `
+        })
+
+        app.component('add-entry-btn', {
+            template: `
+            <div id="add-entry">
+                <ul>
+                    <li><a href="#" @click.prevent="addEntry">+</a></li>
+                </ul>
+            </div>
+            `,
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+                addEntry() {
+                    console.log("Hello")
+                }
+            }
+        })
+
+        app.component('entry-info', {
+            template: `
+            
             `
         })
 
