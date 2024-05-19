@@ -8,27 +8,35 @@
 <body>
     <div id="app">
 
-        <nav-bar></nav-bar>
-        
-        <add-entry-btn
-        @toggle-add-box="toggleAddBox">
-        </add-entry-btn>
-        
-        <entry-info
-        v-if="showAddBox"
-        @toggle-add-box="toggleAddBox"
-        @add-todo="addTODO">
-        </entry-info>
-
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
         let app = Vue.createApp({
+            template: `
+            <nav-bar></nav-bar>
+        
+            <add-entry-btn
+            @toggle-add-box="toggleAddBox">
+            </add-entry-btn>
+            
+            <entry-info
+            v-if="showAddBox"
+            @toggle-add-box="toggleAddBox"
+            @add-todo="addTODO"
+            :title="todoTitle"
+            :desc="todoDesc">
+            </entry-info>
+            `,
+            components: ['nav-bar', 'add-entry-btn', 'entry-info'],
             data() {
                 return {
                     showAddBox: false,
+                    todoArray: [],
+                    todoTitle: '',
+                    todoDesc: '',
                     todo: {title: '', desc: ''}
+
                 }
             },
             methods: {
@@ -36,7 +44,7 @@
                     this.showAddBox = !this.showAddBox
                 },
                 addTODO() {
-                    console.log("TODO")
+                    console.log(`Main Title: ${this.todoTitle}`)
                 }
             }
         })
@@ -82,11 +90,11 @@
                             </div>
                             <div>
                                 <h3 class="box-title">Title</h3>
-                                <input type="text" class="input-box" id="title-box">
+                                <input type="text" class="input-box" id="title-box" v-model="compTitle">
                             </div>
                             <div>
                                 <h3 class="box-title">Description (Optional)</h3>
-                                <textarea type="text" class="input-box" id="desc-box" /> 
+                                <textarea type="text" class="input-box" id="desc-box" v-model="compDesc" /> 
                             </div>
                             <div id="button-div">
                                 <button>Add TODO Item</button>
@@ -100,12 +108,13 @@
 
                 }
             },
+            props: ['title', 'desc'],
             methods: {
                 toggleAddBox() {
                     this.$emit('toggle-add-box');
                 },
                 addTODO() {
-                    this.$emit('add-todo');
+                    this.$emit('add-todo')
                 }
             }
         })
