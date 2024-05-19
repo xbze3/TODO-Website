@@ -28,7 +28,7 @@
             :desc="todoDesc">
             </entry-info>
 
-            <todo-list></todo-list>
+            <todo-list v-for="item in todoArray" :title="item.title" :desc="item.desc"></todo-list>
             `,
             components: ['nav-bar', 'add-entry-btn', 'entry-info', 'todo-list'],
             data() {
@@ -71,12 +71,13 @@
         app.component('todo-list', {
             template: `
             <div id="list-items">
+
                 <div id="title-space" class="todo-item">
-                    <p>Get a Job</p>
+                    <p>{{ title }}</p>
                 </div>
 
                 <div id="desc-space" class="todo-item">
-                    <p></p>
+                    <p>{{ desc }}</p>
                 </div>
 
                 <div id="close-space" class="todo-item">
@@ -84,7 +85,9 @@
                 </div>
 
             </div>
-            `
+            `,
+            props: ['title', 'desc']
+
         })
 
         app.component('add-entry-btn', {
