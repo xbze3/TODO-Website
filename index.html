@@ -31,7 +31,8 @@
             <todo-list v-for="(item, index) in todoArray"
             :title="item.title" :desc="item.desc"
             :position="index"
-            @delete-element="deleteElement">
+            @delete-element="deleteElement"
+            :style={'background-color':color1}>
             </todo-list>
 
             `,
@@ -42,7 +43,12 @@
                     todoArray: [],
                     todoTitle: '',
                     todoDesc: '',
-                    todo: {title: '', desc: ''}
+                    todo: {title: '', desc: ''},
+                    mainColor: 'blue',
+                    color1: '#e5eaef',
+                    color2: '#cbd6df',
+                    switchNumber: 2,
+                    index: 0
 
                 }
             },
@@ -55,6 +61,14 @@
                 addTODO(title, desc) {
                     this.todoTitle = title
                     this.todoDesc = desc
+
+                    if(this.mainColor == this.color1) {
+                        this.mainColor = this.color2
+                    }
+
+                    else {
+                        this.mainColor = this.color1
+                    }
 
                     console.log(`Main Title: ${this.todoTitle}`);
                     console.log(`Main Description: ${this.todoDesc}`);
@@ -81,7 +95,6 @@
         app.component('todo-list', {
             template: `
             <div id="list-items">
-
                 <div id="title-space" class="todo-item">
                     <p>{{ title }}</p>
                 </div>
@@ -95,11 +108,13 @@
                 </div>
 
             </div>
+
             `,
             props: ['title', 'desc', 'position'],
             data() {
                 return {
-                    index: this.position
+                    index: this.position,
+                    switchNumber: 2
                 }
             },
             methods: {

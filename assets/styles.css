@@ -12,7 +12,7 @@
 }
 
 #nav {
-    background-color: var(--main-color);
+    background-color: #6a88a0;
 
 }
 
@@ -33,16 +33,11 @@
 }
 
 #active {
-    background-color: var(--main-color);
-}
-
-#home-link:hover {
-    background-color: blue;
-    transition: 0.3s ease;
+    background-color: #537590;
 }
 
 #add-entry {
-    background-color: var(--main-color);
+    background-color: #537590;
     border-radius: 50%;
     display: inline-block;
     position: fixed;
@@ -63,7 +58,7 @@
 }
 
 #add-entry-box {
-    background-color: var(--main-color);
+    background-color: #537590;
     display: inline-block;
     padding: 10px 20px 10px;
     margin-top: 10px;
@@ -75,7 +70,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-
 }
 
 
@@ -85,8 +79,7 @@
 
 #add-entry-box > div > p > a {
     text-decoration: none;
-    border: 0px solid black;
-    background-color: blue;
+    background-color: ;
     padding: 2px 7px;
     border-radius: 50%;
     color: white;
@@ -146,9 +139,7 @@
     display: flex;
     padding: 10px 20px;
     justify-content: space-between;
-    background-color: aqua;
-    border: 3px solid black;
-
+    background-color: #e5eaef;
 
 }
 
