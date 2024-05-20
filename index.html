@@ -39,7 +39,7 @@
             data() {
                 return {
                     showAddBox: false,
-                    todoArray: [],
+                    todoArray: JSON.parse(localStorage.getItem('todoArray')) || [],
                     todoTitle: '',
                     todoDesc: '',
                     todo: {title: '', desc: ''}
@@ -56,18 +56,12 @@
                     this.todoTitle = title
                     this.todoDesc = desc
 
-                    if(this.mainColor == this.color1) {
-                        this.mainColor = this.color2
-                    }
-
-                    else {
-                        this.mainColor = this.color1
-                    }
-
-                    this.todoArray.push({ title: this.todoTitle, desc: this.todoDesc });
+                    this.todoArray.push({ title: this.todoTitle, desc: this.todoDesc })
+                    localStorage.setItem('todoArray', JSON.stringify(this.todoArray))
                 },
                 deleteElement(index) {
                     this.todoArray.splice(index, 1)
+                    localStorage.setItem('todoArray', JSON.stringify(this.todoArray))
                 }
             }
         })
