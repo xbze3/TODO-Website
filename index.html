@@ -31,8 +31,7 @@
             <todo-list v-for="(item, index) in todoArray"
             :title="item.title" :desc="item.desc"
             :position="index"
-            @delete-element="deleteElement"
-            :style={'background-color':color1}>
+            @delete-element="deleteElement">
             </todo-list>
 
             `,
@@ -70,9 +69,6 @@
                         this.mainColor = this.color1
                     }
 
-                    console.log(`Main Title: ${this.todoTitle}`);
-                    console.log(`Main Description: ${this.todoDesc}`);
-
                     this.todoArray.push({ title: this.todoTitle, desc: this.todoDesc });
                 },
                 deleteElement(index) {
@@ -94,7 +90,7 @@
 
         app.component('todo-list', {
             template: `
-            <div id="list-items">
+            <div v-if="position % switchNumber == 0" id="list-items" style="background-color: white;">
                 <div id="title-space" class="todo-item">
                     <p>{{ title }}</p>
                 </div>
@@ -108,6 +104,23 @@
                 </div>
 
             </div>
+
+            <div v-else id="list-items" style="background-color: #e5eaef;">
+                <div id="title-space" class="todo-item">
+                    <p>{{ title }}</p>
+                </div>
+
+                <div id="desc-space" class="todo-item">
+                    <p>{{ desc }}</p>
+                </div>
+
+                <div id="close-space" class="todo-item">
+                    <p><a href="#" @click.prevent="removeElement">x</a></p>
+                </div>
+
+            </div>
+
+            
 
             `,
             props: ['title', 'desc', 'position'],
